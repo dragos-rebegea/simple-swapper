@@ -15,7 +15,7 @@ class DexManager:
         self.account = Account(pem_file=pem_file)
         self.proxy = ElrondProxy(gateaway)
         self.logger = logger
-
+        self.logger.info(f"gateway: {gateaway}")
         self.pairs = {}
         self.tokenIdentifiers = {}
         self.fetch_pairs()
@@ -104,11 +104,11 @@ class DexManager:
         sender = self.account.address.bech32()
         if receiver is None:
             receiver = self.account.address.bech32()
-        self.account.sync_nonce(self.proxy)
+        nonce = self.proxy.get_account_nonce(self.account.address)
 
         tx = Transaction()
         tx.sender = sender
-        tx.nonce = self.account.nonce
+        tx.nonce = nonce
         tx.version = self.account
         tx.value = str(value)
         tx.receiver = receiver
@@ -128,8 +128,9 @@ class DexManager:
             gasLimit=gasLimit
         )
         tx.sign(self.account)
+        print(f"trying to send transaction hash: {tx.hash}")
         try:
-            tx = tx.send_wait_result(self.proxy, 100)
+            tx = tx.send_wait_result(self.proxy, 700)
             if tx['status'] == 'success':
                 self.logger.debug(f"transaction sent successfully: {tx['hash']}")
             elif tx['status'] == 'invalid':
@@ -187,7 +188,7 @@ class DexManager:
             receiver=pairAddress,
             data=data,
             value=0,
-            gasLimit=80000000
+            gasLimit=20000000
         )
 
         if err is not None:
@@ -205,5 +206,5 @@ if __name__ == '__main__':
         logger=logger,
     )
     #print(dexManager.unWrapEgld(5 * 10 ** 18))
-    #print(dexManager.wrapEgld(10 * 10 ** 18))
-    print(dexManager.swap(wrapEgldTI, rideTI, 10 * 10 ** 18))
+    print(dexManager.wrapEgld(int(1.6 * 10 ** 18)))
+    #print(dexManager.swap(wrapEgldTI, rideTI, 10 * 10 ** 18))

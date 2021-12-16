@@ -69,8 +69,8 @@ def int2hex(value):
     return r
 
 
-graphqlURL = "https://testnet-exchange-graph.elrond.com/graphql"  # https://graph.maiar.exchange/graphql https://testnet-exchange-graph.elrond.com/graphql
-chainID = 'T'  # '1'
+graphqlURL = "https://graph.maiar.exchange/graphql"  # https://graph.maiar.exchange/graphql https://testnet-exchange-graph.elrond.com/graphql
+chainID = '1'  # 'T'
 
 net = ''
 if chainID == 'D':
@@ -81,5 +81,5 @@ elif chainID == 'T':
 accInfoURL = f'https://{net}api.elrond.com/accounts/'
 gateaway = f'https://{net}gateway.elrond.com'
 
-wrapEgldTI = 'WEGLD-f643d8'  # WEGLD-f643d8 WEGLD-bd4d79
-rideTI = 'RIDE-ae50f0'  # RIDE-ae50f0 RIDE-7d18e9
+wrapEgldTI = 'WEGLD-bd4d79'  # WEGLD-f643d8 WEGLD-bd4d79
+rideTI = 'RIDE-7d18e9'  # RIDE-ae50f0 RIDE-7d18e9
