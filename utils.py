@@ -69,8 +69,7 @@ def int2hex(value):
     return r
 
 
-#graphqlURL = "https://testnet-exchange-graph.elrond.com/graphql"  # https://graph.maiar.exchange/graphql https://testnet-exchange-graph.elrond.com/graphql
-graphqlURL = "https://testnet-exchange-graph.elrond.com/graphql"
+graphqlURL = "https://testnet-exchange-graph.elrond.com/graphql"  # https://graph.maiar.exchange/graphql https://testnet-exchange-graph.elrond.com/graphql
 chainID = 'T'  # '1'
 
 net = ''
